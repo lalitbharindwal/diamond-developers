@@ -16,17 +16,13 @@ function toggleTheme(){if(localStorage.getItem('fela_theme')==='theme-dark'){set
 
 //Main Developed Functions
 if(sessionStorage.getItem("AgentData")){
-    const AgentData = {
-        "email": document.getElementById("email").value,
-        "fullname": "Lalit Subhash Bharindwal",
-        "phone_number": "8796775539",
-        "address": "A/p Shrirampur, A.Nagar, MH, IN",
-        "experience": 2
-    };
+    const AgentData = JSON.parse(sessionStorage.getItem("AgentData"))
     document.getElementById("authBtns").innerHTML = "<a href='agent-details.html'>" + AgentData["fullname"] + "</a>";
     document.getElementById("signin").innerHTML = '<a href="agent-details.html"><button type="button" class="btn style1">' + AgentData["fullname"] +'</button></a>';
     document.getElementById("signup").innerHTML = ""
+    
 }
+
 
 //Agent SignIn
 function agentSignin(){

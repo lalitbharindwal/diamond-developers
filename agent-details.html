@@ -139,25 +139,24 @@ More
 <div class="container ptb-100">
 <div class="agent-details-wrap">
 <div class="row gx-5 align-items-center">
-<div class="col-lg-6">
+<!--<div class="col-lg-6">
 <div class="agent-img">
 <img src="assets/img/agents/agent-1.jpg" alt="Image">
 </div>
-</div>
+</div>-->
 <div class="col-lg-6">
 <div class="agent-info-wrap">
 <div class="agent-name">
-<h2>Rocklaura Henry</h2>
+<h2 id="agentName">Loading...</h2>
 <span>Real Estate Agent</span>
 </div>
 <ul class="agent-info list-style">
-<li><b>Experience:</b><span>5 Years</span></li>
-<li><b>Address:</b><span>77 Morris St. Ridgewood, NJ 67655 </span></li>
-<li><b>Phone:</b><span>+1 719-504-1984 </span></li>
-<li><b>Email:</b><span><a href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d6bfb8b0b996a4b9b5bdbab7a3a4b7f8b5b9bb">[email&#160;protected]</a></span></li>
-<li><b>Fax:</b><span>+2 329-504-1984</span></li>
+<li><b>Experience:</b><span id="experience">Loading...</span></li>
+<li><b>Address:</b><span id="address">Loading...</span></li>
+<li><b>Phone:</b><span id="phone">Loading...</span></li>
+<li><b>Email:</b><span id="email">Loading...</span></li>
 </ul>
-<div class="agent-social">
+<!--<div class="agent-social">
 <span>Follow On:</span>
 <ul class="social-profile list-style style1">
 <li>
@@ -181,14 +180,16 @@ More
 </a>
 </li>
 </ul>
-</div>
+</div>-->
 </div>
 </div>
 <div class="col-lg-12">
 <div class="agent-desc">
+<!--
 <h4>About Rocklaura Henry</h4>
 <p>Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Donec sollicitudin molestie malesuada. Nulla porttitor accumsan tincidunt. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus.</p>
 <p>Cras ultricies ligula sed magna dictum porta. Nulla quis lorem ut libero malesuada feugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, </p>
+-->
 <ul class="nav nav-tabs agent-tablist" role="tablist">
 <li class="nav-item">
 <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab_1" type="button" role="tab">Listed Properties</button>
@@ -757,6 +758,13 @@ Register Now
 </div>
 </div>
 </div>
+<script>
+    document.getElementById("agentName").innerHTML = JSON.parse(sessionStorage.getItem("AgentData"))["fullname"];
+    document.getElementById("experience").innerHTML = JSON.parse(sessionStorage.getItem("AgentData"))["experience"];
+    document.getElementById("address").innerHTML = JSON.parse(sessionStorage.getItem("AgentData"))["address"];
+    document.getElementById("phone").innerHTML = JSON.parse(sessionStorage.getItem("AgentData"))["phone_number"];
+    document.getElementById("email").innerHTML = JSON.parse(sessionStorage.getItem("AgentData"))["email"];
+</script>
 
 <script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -771,6 +779,4 @@ Register Now
 <script src="assets/js/tweenmax.min.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
-
-<!-- Mirrored from templates.hibootstrap.com/fela/default/agent-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Dec 2023 06:12:16 GMT -->
 </html>
