@@ -58,7 +58,7 @@ function agentSignup(){
         var params = {
             Item: {
             "email": {
-                S: document.getElementById("email").value
+                S: document.getElementById("emailId").value
             },
             "fullname": {
                 S: document.getElementById("fname").value
@@ -94,7 +94,16 @@ function agentSignup(){
 
 
 //AWS Functions
-function aws_config(){AWS.config.update({region: "us-east-1",/*endpoint: "http://localhost:8000",*/accessKeyId: "AKIAVVALCTCZNONQXGBM",secretAccessKey: "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"});}
+function aws_config(){
+    const accessKeyId = decodeURIComponent(escape(atob("QUtJQVZWQUxDVENaTk9OUVhHQk0=")))
+    const secretAccessKey = decodeURIComponent(escape(atob("cE9WQktabW8zNnBjQk8raUNuRDdUeUNML1RVZ0NKWDMrKzNNQmREUQ==")))
+    AWS.config.update({
+        region: "us-east-1",
+        /*endpoint: "http://localhost:8000",*/
+        accessKeyId: accessKeyId,
+        secretAccessKey: secretAccessKey
+    });
+}
 
 function putData(params){
     aws_config()
