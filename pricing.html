@@ -59,11 +59,11 @@ About Us
 Listing
 </a>
 </li>
-<li class="nav-item">
+<!--<li class="nav-item">
 <a href="agents.html" class="nav-link">
 Agents
 </a>
-</li>
+</li>-->
 <li class="nav-item">
     <a href="contact.html" class="nav-link">Contact Us</a>
 </li>
@@ -409,21 +409,21 @@ Terms &amp; Conditions
 <div class="col-md-6">
 <div class="login-content">
 <h2>Sign In As Agent</h2>
-<form class="user-form" action="#">
+<form class="user-form">
 <div class="row">
 <div class="col-lg-12">
 <div class="form-group">
-<input id="text" name="username" type="text" placeholder="Username" required>
+<input id="email" name="email" type="text" placeholder="Email" required>
 </div>
 </div>
 <div class="col-lg-12">
 <div class="form-group">
-<input id="pwd" name="pwd" type="password" placeholder="Password" required>
+<input id="password" name="password" type="password" placeholder="Password" required>
 </div>
 </div>
 <div class="col-lg-12">
 <div class="form-group">
-<button class="btn style1">
+<button class="btn style1" type="button" onclick="agentSignin()">
 Login Now
 </button>
 </div>
@@ -472,6 +472,7 @@ Login Now
 </div>
 <div class="col-md-6">
 <div class="login-content">
+<br>
 <h2>Sign Up As Agent</h2>
 <p>Please fill the form to create an account</p>
 <form class="user-form" action="#">
@@ -483,30 +484,45 @@ Login Now
 </div>
 <div class="col-lg-12">
 <div class="form-group">
-<input id="email" name="email" type="email" placeholder="Email" required>
+<input id="email" name="email" type="email" placeholder="Email Address" required>
+</div>
+</div>
+<div class="col-lg-12">
+    <div class="form-group">
+        <input id="phone_number" name="Number" type="number" placeholder="Phone Number" required>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="form-group">
+        <input id="address" name="text" type="text" placeholder="Address" required>
+    </div>
+</div>
+<div class="col-lg-12">
+    <div class="form-group">
+        <input id="experience" name="text" type="text" placeholder="Experience" required>
+    </div>
+</div>
+<div class="col-lg-12">
+<div class="form-group">
+<input id="password" name="pwd_4" type="password" placeholder="Password" required>
 </div>
 </div>
 <div class="col-lg-12">
 <div class="form-group">
-<input id="pwd_4" name="pwd_4" type="password" placeholder="Password" required>
-</div>
-</div>
-<div class="col-lg-12">
-<div class="form-group">
-<input id="pwd_3" name="pwd_3" placeholder="Confirm Password" type="password" required>
+<input id="confirm_password" name="pwd_3" placeholder="Confirm Password" type="password" required>
 </div>
 </div>
 <div class="col-sm-12 col-12">
 <div class="checkbox style3">
-<input type="checkbox" id="test_1">
-<label for="test_1">
+<input type="checkbox" id="termConditions">
+<label for="termConditions">
 I Agree with the <a class="link style1" href="terms-of-service.html">Terms &amp; conditions</a> &amp; <a class="link style1" href="privacy-policy.html">privacy policy</a>
 </label>
 </div>
 </div>
 <div class="col-lg-12">
 <div class="form-group">
-<button class="btn style1">
+<button class="btn style1" onclick="agentSignup()">
 Register Now
 </button>
 </div>
@@ -533,6 +549,7 @@ Register Now
 <script src="assets/js/jquery.appear.js"></script>
 <script src="assets/js/tweenmax.min.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
 </body>
 
 <!-- Mirrored from templates.hibootstrap.com/fela/default/faq.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Dec 2023 06:12:17 GMT -->

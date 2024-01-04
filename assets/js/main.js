@@ -11,3 +11,99 @@ if($this.is('a')||$this.is('span')||$this.attr('class').match(/\b(menu-expand)\b
 BackToTop();})(jQuery);function setTheme(themeName){localStorage.setItem('fela_theme',themeName);document.documentElement.className=themeName;}
 function toggleTheme(){if(localStorage.getItem('fela_theme')==='theme-dark'){setTheme('theme-light');}else{setTheme('theme-dark');}}
 (function(){if(localStorage.getItem('fela_theme')==='theme-dark'){setTheme('theme-dark');document.getElementById('slider').checked=false;}else{setTheme('theme-light');document.getElementById('slider').checked=true;}})();
+
+
+
+//Main Developed Functions
+if(sessionStorage.getItem("AgentData")){
+    const AgentData = {
+        "email": document.getElementById("email").value,
+        "fullname": "Lalit Subhash Bharindwal",
+        "phone_number": "8796775539",
+        "address": "A/p Shrirampur, A.Nagar, MH, IN",
+        "experience": 2
+    };
+    document.getElementById("authBtns").innerHTML = "<a href='agent-details.html'>" + AgentData["fullname"] + "</a>";
+    document.getElementById("signin").innerHTML = '<a href="agent-details.html"><button type="button" class="btn style1">' + AgentData["fullname"] +'</button></a>';
+    document.getElementById("signup").innerHTML = ""
+}
+
+//Agent SignIn
+function agentSignin(){
+    document.getElementById("email").value;
+    document.getElementById("password").value;
+    if(document.getElementById("email").value == "vmaxinfo77@gmail.com"){
+        if(document.getElementById("password").value == "1234"){
+            const AgentData = {
+                "email": document.getElementById("email").value,
+                "fullname": "Lalit Subhash Bharindwal",
+                "phone_number": "8796775539",
+                "address": "A/p Shrirampur, A.Nagar, MH, IN",
+                "experience": 2
+            };
+            sessionStorage.setItem("AgentData", JSON.stringify(AgentData));
+            location = "index.html";
+        }else{
+            alert("Incorrect Password");
+        }
+    }else{
+        alert("Not Registered");
+    }
+}
+
+//Agent SignUp
+function agentSignup(){
+    const checkTermsConditions = document.getElementById("termConditions");
+    if(checkTermsConditions.checked){
+        var params = {
+            Item: {
+            "email": {
+                S: document.getElementById("email").value
+            },
+            "fullname": {
+                S: document.getElementById("fname").value
+            },
+            "phone_number": {
+                S: document.getElementById("phone_number").value
+            },
+            "address": {
+                S: document.getElementById("address").value
+            },
+            "experience": {
+                S: document.getElementById("experience").value
+            },
+            "password": {
+                S: document.getElementById("confirm_password").value
+            }
+            },
+            ReturnConsumedCapacity: "TOTAL", 
+            TableName: "REAgents"
+           }
+        
+        putData(params);
+    }else{
+        alert("Please Fill Details and Accept Terms and Conditions")
+    }
+}
+
+
+
+
+
+
+
+
+//AWS Functions
+function aws_config(){AWS.config.update({region: "us-east-1",/*endpoint: "http://localhost:8000",*/accessKeyId: "AKIAVVALCTCZNONQXGBM",secretAccessKey: "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"});}
+
+function putData(params){
+    aws_config()
+    var dynamodb = new AWS.DynamoDB();
+    dynamodb.putItem(params, function(err, data) {
+        if (err){
+            console.log(err, err.stack); // an error occurred
+        } else{
+            console.log(data);           // successful response 
+        }
+      });
+}
