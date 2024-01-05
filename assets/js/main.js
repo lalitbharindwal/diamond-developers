@@ -82,6 +82,164 @@ function agentSignup(){
     }
 }
 
+//Agent Property Listing
+function propertyListing2(){
+    const fileInput = document.getElementById('upload-img');
+    const selectedFiles = fileInput.files;
+
+    for (let i = 0; i < selectedFiles.length; i++) {
+        const file = selectedFiles[i];
+        const reader = new FileReader();
+  
+        reader.onload = function(event) {
+          const base64String = event.target.result;
+          console.log('Base64:', base64String);
+            document.getElementById("image").innerHTML += '<textarea>'+ base64String+'</textarea>'
+          // You can use the base64String here (e.g., send it to the server, display it, etc.)
+        };
+  
+        reader.readAsDataURL(file); // Convert the file to Data URL representation
+      }
+    }
+
+
+function propertyListing(){
+    const fileInput = document.getElementById('upload-img');
+    const selectedFiles = fileInput.files;
+    var propertyData = {
+        "propertyTitle": document.getElementById("propertyTitle").value,
+        "propertyType": document.getElementById("propertyType").value,
+        "propertyStatus": document.getElementById("propertyStatus").value,
+        "propertyAddress": document.getElementById("propertyAddress").value,
+        "price": document.getElementById("price").value,
+        "area": document.getElementById("area").value,
+        "buildYear": document.getElementById("buildYear").value,
+        "rooms": document.getElementById("rooms").value,
+        "bedrooms": document.getElementById("bedrooms").value,
+        "bathrooms": document.getElementById("bathrooms").value,
+        "garages": document.getElementById("garages").value,
+        "propertyDescription": document.getElementById("propertyDescription").value
+    }
+
+    var images = {};
+    for (let i = 0; i < selectedFiles.length; i++) {
+      const file = selectedFiles[i];
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        const result = event.target.result;
+        const blob = new Blob([result], { type: file.type });
+        images["image" + (i+1)] = blob;
+        //const imageUrl = URL.createObjectURL(blob);
+        //const displayImg = document.getElementById('displayImg');
+        //displayImg.src = imageUrl;
+        //<img id="displayImg" src="" alt="Selected Image" style="max-width: 300px; max-height: 300px;">
+        // You can use the 'blob' object here (e.g., send it to the server, further processing, etc.)
+      };
+      reader.readAsArrayBuffer(file); // Convert the file to ArrayBuffer
+    }
+    propertyData["images"] = images;
+
+    aws_config()
+    var s3 = new AWS.S3();
+	var params = {
+		Bucket: "property-listing-data",
+		Key: JSON.parse(sessionStorage.getItem("AgentData"))["email"] + ".json"
+		};
+	s3.getObject(params, function(err, data) {
+		if(err) {
+            if(err.message == "The specified key does not exist."){
+                propertyData = {
+                    "property-1": propertyData
+                }
+
+                var params = {
+                    Body: JSON.stringify(propertyData),
+                    Bucket: "property-listing-data",
+                    Key: JSON.parse(sessionStorage.getItem("AgentData"))["email"] + ".json", 
+                    ServerSideEncryption: "AES256",
+                    StorageClass: "STANDARD_IA"
+                };
+            
+                s3.putObject(params, function(err, data) {
+                     if(err){
+                        //console.log(err, err.stack); // an error occurred
+                        alert("Network Failure")
+                     }else{
+                        //console.log(data);           // successful response
+                        alert("Property Listed Successfully...");
+                        location = "agent-details.html";
+                     }   
+                });
+            }
+		}
+		else{
+			var detail_json   = data.Body.toString('utf-8');         // successful response
+			temp_data = JSON.parse(detail_json);
+            var keyCount  = Object.keys(temp_data).length;
+            var index = [];
+                // build the index
+            for (var x in temp_data) {
+                index.push(x); 
+            }
+            if(keyCount == 0){
+                propertyData = {
+                    "property-1": propertyData
+                }
+
+                params = {
+                    Body: JSON.stringify(propertyData),
+                    Bucket: "property-listing-data",
+                    Key: JSON.parse(sessionStorage.getItem("AgentData"))["email"] + ".json",
+                    ServerSideEncryption: "AES256", 
+                    StorageClass: "STANDARD_IA"
+                };
+                s3.putObject(params, function(err, data) {
+                    if(err){
+                    //console.log(err, err.stack); // an error occurred
+                    alert("Network Failure");
+                    }else{
+                    //console.log(data);           // successful response
+                    alert("Job Posted Successfully");
+                    location = "agent-details.html";
+                    }   
+                });
+            
+            }else{
+                index.sort((a, b) => {
+                    // Extract the last numbers from strings
+                    const getLastNumber = (str) => {
+                        const matches = str.match(/\d+$/); // Match the last continuous digits
+                        return matches ? parseInt(matches[0]) : 0; // Convert matched digits to a number
+                    };
+                    const lastNumberA = getLastNumber(a);
+                    const lastNumberB = getLastNumber(b);
+                    return lastNumberB - lastNumberA; // Sort by the last numbers in descending order
+                });
+
+                var temp = parseInt(index[0].match(/\d+/g))
+                temp_data["property-" + (temp + 1)] = propertyData
+                params = {
+                    Body: JSON.stringify(temp_data),
+                    Bucket: "property-listing-data",
+                    Key: JSON.parse(sessionStorage.getItem("AgentData"))["email"] + ".json",
+                    ServerSideEncryption: "AES256", 
+                    StorageClass: "STANDARD_IA"
+                };
+                s3.putObject(params, function(err, data) {
+                    if(err){
+                    //console.log(err, err.stack); // an error occurred
+                    alert("Network Failure")
+                    }else{
+                    //console.log(data);           // successful response
+                    alert("Job Posted Successfully")
+                    location = "agent-details.html";
+                }   
+            });
+        }
+    }
+});
+}
+
 
 
 
