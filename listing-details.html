@@ -21,7 +21,7 @@
 <title>Diamond Developers</title>
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 </head>
-<body>
+<body onload="listingDetails()">
 
 <div class="loader js-preloader">
 <div></div>
@@ -146,52 +146,52 @@ More
 <div class="row align-items-start">
 <div class="col-md-8">
 <div class="property-title">
-<h2>Luxury &amp; Modern Apartment</h2>
+<h2 id="propertyTitle"></h2>
 <ul class="property-metainfo list-style">
-<li><i class="flaticon-location"></i>64/A, Ist Aveneu, High Street, Florida, USA</li>
-<li><i class="flaticon-square"></i>1310 Sqft</li>
+<li id="propertyAddress"></li>
+<li id="area"></li>
 </ul>
 </div>
 </div>
 <div class="col-md-4">
-<p class="property-price">$34,000 <span>/ month</span></p>
+<p class="property-price" id="price"></p>
 </div>
-</div>
-<div class="property-img">
-<img src="assets/img/property/single-property-1.jpg" alt="Image">
-<span class="property-status">For Rent</span>
 </div>
 <div class="property-desc">
 <h4>Description</h4>
-<p>Cras ultricies ligula sed magna dictum porta. Nulla quis lorem ut libero malesuada feugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in ipsum id orci porta dapibus. Curabitur arcu erat accumsan id imperdiet et, porttitor at sem. Curabitur arcu erat accumsan id imperdiet et porttitor.</p>
-<p>Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Donec sollicitudin molestie malesuada. Nulla porttitor accumsan tincidunt. Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Proin eget tortor risus. Donec rutrum congue leo eget malesuada. Pellentesque in ipsum id orci porta dapibus.</p>
+<p id="propertyDescription"></p>
 </div>
 <div class="property-desc">
 <h4>Property Details</h4>
 <div class="row">
 <div class="col-md-4">
 <ul class="property-features list-style">
-<li>Property ID : <span>V25680</span></li>
-<li>Property Price : <span>$34,000</span></li>
-<li>Bath : <span>2</span></li>
+<li>Property ID : <span id="propertyId"></span></li>
+<li>Property Price : <span id="propertyPrice"></span></li>
+<li>Bath : <span id="bathrooms"></span></li>
 </ul>
 </div>
 <div class="col-md-4">
 <ul class="property-features list-style">
-<li>Property Type : <span>Apartment</span></li>
-<li>Rooms : <span>6</span></li>
-<li>Garages : <span>4</span></li>
+<li>Property Type : <span id="propertyType"></span></li>
+<li>Rooms : <span id="rooms"></span></li>
+<li>Garages : <span id="garages"></span></li>
 </ul>
 </div>
 <div class="col-md-4">
 <ul class="property-features list-style">
-<li>Property Status : <span>For Rent</span></li>
-<li>Bedrooms ID : <span>10</span></li>
-<li>Year Built : <span>14/02/22</span></li>
+<li>Property Status : <span id="PropertyStatus"></span></li>
+<li>Bedrooms ID : <span id="Area"></span></li>
+<li>Year Built : <span id="buildYear"></span></li>
 </ul>
 </div>
 </div>
 </div>
+<main class="main">
+  <div class="container" id="imagesGallery">
+  </div>
+</main>
+<!--
 <div class="property-desc">
 <h4>Floor Plans</h4>
 <div class="floor-plan">
@@ -224,6 +224,7 @@ More
 </div>
 </div>
 </div>
+
 <div class="property-desc">
 <h4>Property Video</h4>
 <div class="property-video">
@@ -234,6 +235,7 @@ More
 </a>
 </div>
 </div>
+
 <div class="property-desc">
 <h4>3 Reviews</h4>
 <div class="property-review comment-item-wrap">
@@ -412,6 +414,7 @@ Submit Review
 </div>
 </form>
 </div>
+
 <div class="property-desc">
 <h4>Similar Property</h4>
 <div class="row">
@@ -461,6 +464,7 @@ Submit Review
 </div>
 </div>
 </div>
+-->
 </div>
 </div>
 <div class="col-xl-4">
@@ -501,6 +505,7 @@ Submit Review
 </div>
 </form>
 </div>
+<!--
 <div class="sidebar-widget">
 <h4>Recent Properties</h4>
 <div class="property-thumb-item">
@@ -531,6 +536,7 @@ Submit Review
 </div>
 </div>
 </div>
+-->
 <div class="sidebar-widget">
 <h4>Agent Information</h4>
 <div class="agent-info-box">
@@ -565,6 +571,7 @@ Submit Review
 </form>
 </div>
 </div>
+<!--
 <div class="sidebar-widget">
 <h4>Popular Tags</h4>
 <ul class="tag-list list-style">
@@ -577,6 +584,7 @@ Submit Review
 <li><a href="listings.html">Property</a></li>
 </ul>
 </div>
+-->
 </div>
 </div>
 </div>
@@ -891,8 +899,89 @@ Register Now
 </div>
 </div>
 </div>
+<script>
+    
 
-<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/jquery.min.js"></script>
+    function listingDetails(){
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const companyEmail = decodeURIComponent(escape(atob(urlParams.get('companyid'))));
+        const propertyId = decodeURIComponent(escape(atob(urlParams.get('propertyid'))));
+        aws_config()
+        var s3 = new AWS.S3();
+        var params = {
+            Bucket: "property-listing-data",
+            Key: companyEmail + ".json"
+            };
+        s3.getObject(params, function(err, data) {
+            if(err) {
+                //alert("Network Failure");
+            }else{
+                var detail_json   = data.Body.toString('utf-8');         // successful response
+                temp_data = JSON.parse(detail_json);
+                var keyCount  = Object.keys(temp_data).length;
+                document.getElementById("propertyTitle").innerHTML = temp_data[propertyId]["propertyTitle"];
+                document.getElementById("propertyAddress").innerHTML = '<i class="flaticon-location"></i>' + temp_data[propertyId]["propertyAddress"];
+                document.getElementById("area").innerHTML = '<i class="flaticon-square"></i>' + temp_data[propertyId]["area"] + 'sqft';
+                document.getElementById("price").innerHTML = temp_data[propertyId]["price"] + ' Rs';
+                document.getElementById("propertyDescription").innerHTML = temp_data[propertyId]["propertyDescription"];
+                document.getElementById("propertyId").innerHTML = urlParams.get('propertyid');
+                document.getElementById("propertyPrice").innerHTML = temp_data[propertyId]["price"] + ' Rs';
+                document.getElementById("propertyType").innerHTML = temp_data[propertyId]["propertyType"];
+                document.getElementById("rooms").innerHTML = temp_data[propertyId]["rooms"];
+                document.getElementById("bathrooms").innerHTML = temp_data[propertyId]["bathrooms"];
+                document.getElementById("garages").innerHTML = temp_data[propertyId]["garages"];
+                document.getElementById("PropertyStatus").innerHTML = temp_data[propertyId]["propertyStatus"];
+                document.getElementById("Area").innerHTML = temp_data[propertyId]["area"] + 'sqft';
+                document.getElementById("buildYear").innerHTML = temp_data[propertyId]["buildYear"];
+
+                    
+
+                var index = [];
+                    // build the index
+                for (var x in temp_data) {
+                    index.push(x);
+                }
+                var keyCount = Object.keys(temp_data[propertyId]["images"]).length;
+                for(var i = 1; i <= keyCount; i++){
+                    //console.log(temp_data[index[i]]["images"])
+                     // Convert object to JSON string
+                    // Create a Blob from the JSON string
+                    //var blob = new Blob([atob(temp_data[propertyId]["images"]["image"+i])], { type: 'application/json' });
+                    var imageUrl;
+                    // Decode base64 string to binary string
+                    var binaryString = atob(temp_data[propertyId]["images"]["image"+i]);
+
+                    // Convert binary string to ArrayBuffer
+                    var arrayBuffer = new ArrayBuffer(binaryString.length);
+                    var uint8Array = new Uint8Array(arrayBuffer);
+
+                    for (var j = 0; j < binaryString.length; j++) {
+                    uint8Array[j] = binaryString.charCodeAt(j);
+                    }
+                    try {
+                        // Create an object URL
+                        const blob = new Blob([arrayBuffer], { type: 'image/*' });
+                        imageUrl = URL.createObjectURL(blob);
+                    } catch (error) {
+                        console.error('Error creating object URL:', error);
+                    }
+                    document.getElementById("imagesGallery").innerHTML += 
+                    `<div class="card">
+                        <div class="card-image">
+                            <a href="${imageUrl}" data-fancybox="gallery" data-caption="Caption Images 1">
+                                <img src="${imageUrl}" alt="Image Gallery">
+                            </a>
+                        </div>
+                    </div>`
+                }
+            }
+        });
+    }
+
+</script>
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.12.min.js"></script>
+<script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
 <script src="assets/js/form-validator.min.js"></script>
 <script src="assets/js/contact-form-script.js"></script>
@@ -906,5 +995,76 @@ Register Now
 <script src="assets/js/main.js"></script>
 </body>
 
-<!-- Mirrored from templates.hibootstrap.com/fela/default/listing-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Dec 2023 06:12:11 GMT -->
+
+<style>
+
+*,
+*::before,
+*::after {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	list-style: none;
+	list-style-type: none;
+	text-decoration: none;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+
+
+#imagesGallery {
+  max-width: 80rem;
+  width: 100%;
+  padding: 4rem 2rem;
+  margin: 0 auto;
+}
+
+.main {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .card {
+    color: #252a32;
+    border-radius: 2px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.24);
+
+    &-image {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding-top: 70%;
+      background: #ffffff;
+
+      img {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .main {
+    .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-gap: 1rem;
+    }
+  }
+}
+
+</style>
 </html>

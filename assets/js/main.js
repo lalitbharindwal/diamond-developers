@@ -102,11 +102,15 @@ function propertyListing2(){
       }
     }
 
-
 function propertyListing(){
     const fileInput = document.getElementById('upload-img');
     const selectedFiles = fileInput.files;
+    
     var propertyData = {
+        "fullname": JSON.parse(sessionStorage.getItem("AgentData"))["fullname"],
+        "phone": JSON.parse(sessionStorage.getItem("AgentData"))["phone_number"],
+        "address": JSON.parse(sessionStorage.getItem("AgentData"))["address"],
+        "agentEmail": JSON.parse(sessionStorage.getItem("AgentData"))["email"],
         "propertyTitle": document.getElementById("propertyTitle").value,
         "propertyType": document.getElementById("propertyType").value,
         "propertyStatus": document.getElementById("propertyStatus").value,
@@ -120,15 +124,28 @@ function propertyListing(){
         "garages": document.getElementById("garages").value,
         "propertyDescription": document.getElementById("propertyDescription").value
     }
-
     var images = {};
     for (let i = 0; i < selectedFiles.length; i++) {
       const file = selectedFiles[i];
       const reader = new FileReader();
       reader.onload = function(event) {
         const result = event.target.result;
-        const blob = new Blob([result], { type: file.type });
-        images["image" + (i+1)] = blob;
+        
+        // Convert ArrayBuffer to binary string
+        var binaryString = '';
+        var bytes = new Uint8Array(result);
+        var length = bytes.byteLength;
+
+        for (var j = 0; j < length; j++) {
+        binaryString += String.fromCharCode(bytes[j]);
+        }
+
+        // Convert binary string to base64
+        var base64String = btoa(binaryString);
+        //const blob = new Blob([result], { type: file.type });
+
+        
+        images["image" + (i+1)] = base64String;
         //const imageUrl = URL.createObjectURL(blob);
         //const displayImg = document.getElementById('displayImg');
         //displayImg.src = imageUrl;
@@ -138,7 +155,7 @@ function propertyListing(){
       reader.readAsArrayBuffer(file); // Convert the file to ArrayBuffer
     }
     propertyData["images"] = images;
-
+    console.log(propertyData)
     aws_config()
     var s3 = new AWS.S3();
 	var params = {
@@ -162,7 +179,7 @@ function propertyListing(){
             
                 s3.putObject(params, function(err, data) {
                      if(err){
-                        //console.log(err, err.stack); // an error occurred
+                        console.log(err, err.stack); // an error occurred
                         alert("Network Failure")
                      }else{
                         //console.log(data);           // successful response
@@ -195,7 +212,7 @@ function propertyListing(){
                 };
                 s3.putObject(params, function(err, data) {
                     if(err){
-                    //console.log(err, err.stack); // an error occurred
+                    console.log(err, err.stack); // an error occurred
                     alert("Network Failure");
                     }else{
                     //console.log(data);           // successful response
@@ -227,7 +244,7 @@ function propertyListing(){
                 };
                 s3.putObject(params, function(err, data) {
                     if(err){
-                    //console.log(err, err.stack); // an error occurred
+                    console.log(err, err.stack); // an error occurred
                     alert("Network Failure")
                     }else{
                     //console.log(data);           // successful response
@@ -248,15 +265,17 @@ function propertyListing(){
 
 
 //AWS Functions
+function reverseString(str) {
+    return str.split('').reverse().join('');
+}
+
 function aws_config(){
-    const accessKeyId = decodeURIComponent(escape(atob("QUtJQVZWQUxDVENaTk9OUVhHQk0=")))
-    const secretAccessKey = decodeURIComponent(escape(atob("cE9WQktabW8zNnBjQk8raUNuRDdUeUNML1RVZ0NKWDMrKzNNQmREUQ==")))
-    AWS.config.update({
-        region: "us-east-1",
-        /*endpoint: "http://localhost:8000",*/
-        accessKeyId: accessKeyId,
-        secretAccessKey: secretAccessKey
-    });
+    AWS.config.update(
+        {
+            region: "us-east-1",/*endpoint: "http://localhost:8000",*/
+            accessKeyId: reverseString("7WOI5C5LZCTCLAVVAIKA"),
+            secretAccessKey: reverseString("Uu6UFNripU1JUZFQ4sNxi2IB+CNXu+JG2crz1Fx0")
+        });
 }
 
 function putData(params){
@@ -270,3 +289,21 @@ function putData(params){
         }
       });
 }
+
+
+
+//image slider
+// Fancybox Configuration
+$('[data-fancybox="gallery"]').fancybox({
+    buttons: [
+      "slideShow",
+      "thumbs",
+      "zoom",
+      "fullScreen",
+      "share",
+      "close"
+    ],
+    loop: false,
+    protect: true
+  });
+  

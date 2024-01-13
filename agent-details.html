@@ -195,15 +195,15 @@ More
 <li class="nav-item">
 <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab_1" type="button" role="tab">Listed Properties</button>
 </li>
-<li class="nav-item">
+<!--<li class="nav-item">
 <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab_2" type="button" role="tab">Customer Review</button>
-</li>
+</li>-->
 </ul>
 <div class="tab-content hw-tab-content">
 <div class="tab-pane fade show active" id="tab_1" role="tabpanel">
 <div id="propertyInfo" class="row justify-content-center">
 
-
+<!--
 <div class="col-xl-4 col-lg-6 col-md-6">
 <div class="property-card style2">
 <div class="property-img-slider owl-carousel">
@@ -226,6 +226,7 @@ More
 </div>
 </div>
 </div>
+-->
 </div>
 </div>
 <div class="tab-pane fade" id="tab_2" role="tabpanel">
@@ -752,21 +753,46 @@ Terms &amp; Conditions
                 for (var x in temp_data) {
                     index.push(x);
                 }
-                console.log(index)
-                for(var i = 0; i < keyCount; i++){
-                   
 
-                }
                 for(var i = 0; i < keyCount; i++){
-                    /*document.getElementById("Images"+index[i]).innerHTML += 
-                    '<img src="assets/img/property/property-3.jpg" alt="Image">'*/
-                    
+document.getElementById("propertyInfo").innerHTML += `<div onclick="set_property_number(this)" class="col-xl-4 col-lg-6 col-md-6" id="${index[i]}">
+<div onclick="property_details(this)" id="${temp_data[index[i]]["agentEmail"]}" class="property-card style2" >
+<div class="property-img-slider owl-carousel">
+<img src="assets/img/property/property-4.jpg" alt="Image">
+<img src="assets/img/property/property-13.jpg" alt="Image">
+<img src="assets/img/property/property-12.jpg" alt="Image">
+</div>
+<div class="property-info">
+<div class="property-status-wrap">
+<span class="property-status">For Rent</span>
+<p class="property-price">$25,900/<span>month</span></p>
+</div>
+<h3><a>Dreamy Penthouse</a></h3>
+<p><i class="flaticon-location"></i>4890 Grey Fox Fam Road, Houston</p>
+<ul class="property-metainfo list-style">
+<li><i class="flaticon-double-bed"></i>05</li>
+<li><i class="flaticon-bath-tub"></i>02</li>
+<li><i class="flaticon-square"></i>2210 sqft</li>
+</ul>
+</div>
+</div>
+</div>`;
                 }
                 
                 
         }
     });
 
+    }
+
+    var companyEmail;
+    function set_property_number(obj){
+        location = "listing-details.html?companyid="+ btoa(unescape(encodeURIComponent(companyEmail))) +"&propertyid=" + btoa(unescape(encodeURIComponent(obj.id)));
+    }
+
+    function property_details(obj){
+        var id = obj.id;
+        companyEmail = id;
     }
 
 
@@ -781,30 +807,48 @@ Terms &amp; Conditions
 
     imgUpload.addEventListener('change', previewImgs, true);
     function previewImgs(event) {
-    totalFiles = imgUpload.files.length;
+        const maxSizeInBytes = 10 * 1024 * 1024; // 10 MB
     
-    if(!!totalFiles) {
-        imgPreview.classList.remove('img-thumbs-hidden');
-    }
+            if (imgUpload.files.length > 0) {
+                const fileSize = imgUpload.files[0].size;
+
+                if (fileSize > maxSizeInBytes) {
+                    alert('File size exceeds the limit (10 MB). Please choose a smaller file.');
+                    imgUpload.value = '';
+                    // You can optionally clear the file input value
+                    // fileInput.value = '';
+                }else if(imgUpload.files.length > 11){
+                    alert('Only 10 Images Allowed');
+                    imgUpload.value = '';
+                }else{
+                    if(!!totalFiles) {
+                        imgPreview.classList.remove('img-thumbs-hidden');
+                    }
     
-    for(var i = 0; i < totalFiles; i++) {
-        wrapper = document.createElement('div');
-        wrapper.classList.add('wrapper-thumb');
-        removeBtn = document.createElement("span");
-        nodeRemove= document.createTextNode('x');
-        removeBtn.classList.add('remove-btn');
-        removeBtn.appendChild(nodeRemove);
-        img = document.createElement('img');
-        img.src = URL.createObjectURL(event.target.files[i]);
-        img.classList.add('img-preview-thumb');
-        wrapper.appendChild(img);
-        wrapper.appendChild(removeBtn);
-        imgPreview.appendChild(wrapper);
-        $('.remove-btn').click(function(){
-        $(this).parent('.wrapper-thumb').remove();
-        });    
-    }
-}
+                    for(var i = 0; i < totalFiles; i++) {
+                        wrapper = document.createElement('div');
+                        wrapper.classList.add('wrapper-thumb');
+                        removeBtn = document.createElement("span");
+                        nodeRemove= document.createTextNode('x');
+                        removeBtn.classList.add('remove-btn');
+                        removeBtn.appendChild(nodeRemove);
+                        img = document.createElement('img');
+                        img.src = URL.createObjectURL(event.target.files[i]);
+                        img.classList.add('img-preview-thumb');
+                        wrapper.appendChild(img);
+                        wrapper.appendChild(removeBtn);
+                        imgPreview.appendChild(wrapper);
+                        $('.remove-btn').click(function(){
+                        $(this).parent('.wrapper-thumb').remove();
+                        });    
+                        }
+                    }
+                    totalFiles = imgUpload.files.length;
+                }
+                    
+            }
+                    
+                
 </script>
 
 <style>
