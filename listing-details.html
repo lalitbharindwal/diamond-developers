@@ -1,12 +1,8 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
-<!-- Mirrored from templates.hibootstrap.com/fela/default/listing-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 11 Dec 2023 06:12:06 GMT -->
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="assets/css/flaticon.css">
 <link rel="stylesheet" href="assets/css/remixicon.css">
@@ -22,18 +18,12 @@
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 </head>
 <body onload="listingDetails()">
-
 <div class="loader js-preloader">
 <div></div>
 <div></div>
 <div></div>
 </div>
-
-
-
-
 <div class="page-wrapper">
-
 <header class="header-wrap style1">
 <div class="container">
 <nav class="navbar navbar-expand-md navbar-light">
@@ -48,17 +38,17 @@
 <ul class="navbar-nav ms-auto">
 <li class="nav-item">
 <a href="index.html" class="nav-link">
-Home
+HOME
 </a>
 </li>
 <li class="nav-item">
 <a href="about.html" class="nav-link">
-About Us
+ABOUT
 </a>
 </li>
 <li class="nav-item">
 <a href="listings-two.html" class="nav-link">
-Listing
+LISTINGS
 </a>
 </li>
 <!--<li class="nav-item">
@@ -67,25 +57,25 @@ Agents
 </a>
 </li>-->
 <li class="nav-item">
-<a href="contact.html" class="nav-link">Contact Us</a>
+<a href="contact.html" class="nav-link">CONTACT</a>
 </li>
 <li class="nav-item">
 <a href="#" class="nav-link">
-More
+MORE
 <i class="ri-add-line"></i>
 </a>
 <ul class="dropdown-menu">
 <li class="nav-item">
-<a href="how-it-works.html" class="nav-link">How It Works</a>
+<a href="how-it-works.html" class="nav-link">HOW IT WORKS</a>
 </li>
 <li class="nav-item">
 <a href="faq.html" class="nav-link">FAQ</a>
 </li>
 <li class="nav-item">
-<a href="terms-of-service.html" class="nav-link">Terms of Service</a>
+<a href="terms-of-service.html" class="nav-link">TERMS OF SERVICE</a>
 </li>
 <li class="nav-item">
-<a href="pricing.html" class="nav-link">Pricing</a>
+<a href="pricing.html" class="nav-link">PRICING</a>
 </li>
 <br>
 <li style="text-align: center;">
@@ -96,7 +86,6 @@ More
 </li>
 </ul>
 </li>
-
 
 <li class="nav-item d-lg-none" id="signin">
 <button type="button" class="btn style3" data-bs-toggle="modal" data-bs-target="#signIn">Sign In</button>
@@ -120,10 +109,7 @@ More
 </div>
 </div>
 </header>
-
-
 <div class="content-wrapper">
-
 <div class="breadcrumb-wrap bg-f br-1">
 <div class="container">
 <div class="breadcrumb-title">
@@ -136,7 +122,6 @@ More
 </div>
 </div>
 </div>
-
 
 <section class="property-details-wrap pt-100 pb-75">
 <div class="container">
@@ -590,9 +575,7 @@ Submit Review
 </div>
 </div>
 </section>
-
 </div>
-
 
 <footer class="footer-wrap style2 pt-100">
 <img src="assets/img/footer-map.png" alt="IMage" class="footer-shape-one">
@@ -614,11 +597,9 @@ Submit Review
 </button>
 <div class="dropdown-menu language-dropdown-menu">
 <a class="dropdown-item" href="#">
-
 English
 </a>
 <a class="dropdown-item" href="#">
-
 Hindi
 </a>
 <a class="dropdown-item" href="#">
@@ -679,7 +660,7 @@ Thane
 <li>
 <a href="about.html" target="_blank">
 <i class="ri-arrow-right-s-line"></i>
-About Us
+About
 </a>
 </li>
 <li>
@@ -761,13 +742,8 @@ Terms &amp; Conditions
 </div>
 </div>
 </footer>
-
 </div>
-
-
 <a href="javascript:void(0)" class="back-to-top bounce"><i class="ri-arrow-up-s-line"></i></a>
-
-
 <div class="modal fade" id="signIn" tabindex="-1" role="dialog">
 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 <div class="modal-content">
@@ -897,8 +873,6 @@ Register Now
 </div>
 </div>
 <script>
-    
-
     function listingDetails(){
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -930,9 +904,7 @@ Register Now
                 document.getElementById("garages").innerHTML = temp_data[propertyId]["garages"];
                 document.getElementById("PropertyStatus").innerHTML = temp_data[propertyId]["propertyStatus"];
                 document.getElementById("Area").innerHTML = temp_data[propertyId]["area"] + 'sqft';
-                document.getElementById("buildYear").innerHTML = temp_data[propertyId]["buildYear"];
-
-                    
+                document.getElementById("buildYear").innerHTML = temp_data[propertyId]["buildYear"];            
 
                 var index = [];
                     // build the index
@@ -991,8 +963,6 @@ Register Now
 <script src="assets/js/tweenmax.min.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
-
-
 <style>
 
 *,
@@ -1008,8 +978,6 @@ Register Now
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
 }
-
-
 
 #imagesGallery {
   max-width: 80rem;
@@ -1062,6 +1030,5 @@ Register Now
     }
   }
 }
-
 </style>
 </html>
