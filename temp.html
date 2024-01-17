@@ -1,0 +1,31 @@
+<script>
+    const url = 'https://vmaxinfo.in';
+
+// Make a GET request using the Fetch API
+let headers = new Headers();
+    headers.append('Origin','*');
+fetch(url, {
+    mode: 'no-cors'
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.text();
+  })
+  .then(html => {
+    // Use JavaScript to manipulate the HTML content
+    console.log(html)
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    console.log(doc)
+    /* Extract and print specific data (e.g., titles of articles)
+    const headings = doc.querySelectorAll('h2');
+    headings.forEach(heading => {
+      console.log(heading.textContent);
+    });*/
+  })
+  .catch(error => {
+    console.error('Error fetching the page:', error);
+  });
+</script>
