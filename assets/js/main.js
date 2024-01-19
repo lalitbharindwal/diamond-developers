@@ -82,28 +82,10 @@ function agentSignup(){
     }
 }
 
-//Agent Property Listing
-function propertyListing2(){
-    const fileInput = document.getElementById('upload-img');
-    const selectedFiles = fileInput.files;
-
-    for (let i = 0; i < selectedFiles.length; i++) {
-        const file = selectedFiles[i];
-        const reader = new FileReader();
-  
-        reader.onload = function(event) {
-          const base64String = event.target.result;
-          console.log('Base64:', base64String);
-            document.getElementById("image").innerHTML += '<textarea>'+ base64String+'</textarea>'
-          // You can use the base64String here (e.g., send it to the server, display it, etc.)
-        };
-  
-        reader.readAsDataURL(file); // Convert the file to Data URL representation
-      }
-    }
-
 function propertyListing(){
     const fileInput = document.getElementById('upload-img');
+    document.getElementById("addPropertyBtn").innerHTML = "Uploading...";
+    document.getElementById("addPropertyBtn").disabled = true;
     const selectedFiles = fileInput.files;
     
     var propertyData = {
@@ -155,7 +137,6 @@ function propertyListing(){
       reader.readAsArrayBuffer(file); // Convert the file to ArrayBuffer
     }
     propertyData["images"] = images;
-    console.log(propertyData)
     aws_config()
     var s3 = new AWS.S3();
 	var params = {
@@ -216,11 +197,10 @@ function propertyListing(){
                     alert("Network Failure");
                     }else{
                     //console.log(data);           // successful response
-                    alert("Job Posted Successfully");
+                    alert("Property Listed Successfully...");
                     location = "agent-details.html";
                     }   
                 });
-            
             }else{
                 index.sort((a, b) => {
                     // Extract the last numbers from strings
@@ -248,7 +228,7 @@ function propertyListing(){
                     alert("Network Failure")
                     }else{
                     //console.log(data);           // successful response
-                    alert("Job Posted Successfully")
+                    alert("Property Listed Successfully...")
                     location = "agent-details.html";
                 }   
             });

@@ -201,8 +201,8 @@ MORE
                             try {
                                 // Create an object URL
                                 // Decode base64 string to binary string
-                                if(detail_json[index[i]]["images"]["image"+i] != undefined){
-                                    var binaryString = atob(detail_json[index[i]]["images"]["image"+i]);
+                                if(detail_json[index[i]]["images"]["image"+1] != undefined){
+                                    var binaryString = atob(detail_json[index[i]]["images"]["image"+1]);
                                     // Convert binary string to ArrayBuffer
                                     var arrayBuffer = new ArrayBuffer(binaryString.length);
                                     var uint8Array = new Uint8Array(arrayBuffer);

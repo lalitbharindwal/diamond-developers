@@ -166,14 +166,15 @@ MORE
 <div class="col-md-4">
 <ul class="property-features list-style">
 <li>Property Status : <span id="PropertyStatus"></span></li>
-<li>Bedrooms ID : <span id="Area"></span></li>
+<li>Area : <span id="Area"></span></li>
 <li>Year Built : <span id="buildYear"></span></li>
 </ul>
 </div>
 </div>
 </div>
+<h4>Photos Gallery</h4>
 <main class="main">
-  <div class="container" id="imagesGallery">
+  <div class="container" id="imagesGallery" style="overflow-y: auto; height: 12cm;">
   </div>
 </main>
 <!--
@@ -455,89 +456,20 @@ Submit Review
 <div class="col-xl-4">
 <div class="sidebar">
 <div class="sidebar-widget">
-<h4>Book This Apartment</h4>
-<form action="#" class="filter-widget">
-<div class="form-group">
-<input type="text" placeholder="Full Name">
-</div>
-<div class="form-group">
-<input type="number" placeholder="Phone Number">
-</div>
-<div class="form-group">
-<input type="email" placeholder="Email Address">
-</div>
-<div class="form-group">
-<select name="category" id="category">
-<option data-show="Family Members" value="0">Family Members</option>
-<option value="1">2</option>
-<option value="2">4</option>
-<option value="3">6</option>
-</select>
-</div>
-<div class="form-group">
-<select name="region" id="region">
-<option data-show="Children" value="0">Children</option>
-<option value="1">1</option>
-<option value="2">2</option>
-<option value="3">3</option>
-</select>
-</div>
-<div class="form-group">
-<textarea name="booking_msg" id="booking_msg" cols="30" rows="10" placeholder="Your Message"></textarea>
-</div>
-<div class="form-group">
-<button class="btn style2">Request Booking</button>
-</div>
-</form>
-</div>
-<!--
-<div class="sidebar-widget">
-<h4>Recent Properties</h4>
-<div class="property-thumb-item">
-<div class="property-thumb-img">
-<img src="assets/img/blog/post-thumb-1.jpg" alt="Image">
-</div>
-<div class="property-thumb-info">
-<h6><a href="listing-details.html">Luxury Villa In Rigo Park</a></h6>
-<p>$34,000 <span>/month</span></p>
-</div>
-</div>
-<div class="property-thumb-item">
-<div class="property-thumb-img">
-<img src="assets/img/blog/post-thumb-2.jpg" alt="Image">
-</div>
-<div class="property-thumb-info">
-<h6><a href="listing-details.html">Apartment With 3 BHK</a></h6>
-<p>$21,000 <span>/month</span></p>
-</div>
-</div>
-<div class="property-thumb-item">
-<div class="property-thumb-img">
-<img src="assets/img/blog/post-thumb-3.jpg" alt="Image">
-</div>
-<div class="property-thumb-info">
-<h6><a href="listing-details.html">Ready Flat For Rent</a></h6>
-<p>$14,000 <span>/month</span></p>
-</div>
-</div>
-</div>
--->
-<div class="sidebar-widget">
 <h4>Agent Information</h4>
 <div class="agent-info-box">
 <div class="agent-name-wrap">
-<div class="agent-img">
+<!--<div class="agent-img">
 <img src="assets/img/clients/client-1.jpg" alt="Image">
-</div>
+</div>-->
 <div class="agent-name">
-<h6><a href="agent-details.html">Jayden Gabrien</a></h6>
-<span>Senior Sales Manager</span>
+<h6><a href="agent-details.html" id="agentName"></a></h6>
 </div>
 </div>
 <ul class="agent-address list-style">
-<li><i class="ri-map-pin-line"></i>302 Ave PArk, New York</li>
-<li><i class="ri-phone-line"></i>+222 023 4563 123</li>
-<li><i class="ri-mail-send-line"></i><a href="https://templates.hibootstrap.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="99f0f7fff6d9f3f8f0fdfcf7b7faf6f4">[email&#160;protected]</a></li>
+<li id="agentAddress"></li>
+<li id="agentNumber"></li>
+<li id="agentEmail"></li>
 </ul>
 <form action="#" class="agent-contact">
 <div class="form-group">
@@ -573,6 +505,83 @@ Submit Review
 </div>
 </div>
 </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="sidebar">
+      <div class="sidebar-widget">
+      <h4>Book This Apartment</h4>
+      <form action="#" class="filter-widget">
+      <div class="form-group">
+      <input type="text" placeholder="Full Name">
+      </div>
+      <div class="form-group">
+      <input type="number" placeholder="Phone Number">
+      </div>
+      <div class="form-group">
+      <input type="email" placeholder="Email Address">
+      </div>
+      <div class="form-group">
+      <select name="category" id="category">
+      <option data-show="Family Members" value="0">Family Members</option>
+      <option value="1">2</option>
+      <option value="2">4</option>
+      <option value="3">6</option>
+      </select>
+      </div>
+      <div class="form-group">
+      <select name="region" id="region">
+      <option data-show="Children" value="0">Children</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      </select>
+      </div>
+      <div class="form-group">
+      <textarea name="booking_msg" id="booking_msg" cols="30" rows="10" placeholder="Your Message"></textarea>
+      </div>
+      <div class="form-group">
+      <button class="btn style2">Request Booking</button>
+      </div>
+      </form>
+      </div>
+      <!--
+      <div class="sidebar-widget">
+      <h4>Recent Properties</h4>
+      <div class="property-thumb-item">
+      <div class="property-thumb-img">
+      <img src="assets/img/blog/post-thumb-1.jpg" alt="Image">
+      </div>
+      <div class="property-thumb-info">
+      <h6><a href="listing-details.html">Luxury Villa In Rigo Park</a></h6>
+      <p>$34,000 <span>/month</span></p>
+      </div>
+      </div>
+      <div class="property-thumb-item">
+      <div class="property-thumb-img">
+      <img src="assets/img/blog/post-thumb-2.jpg" alt="Image">
+      </div>
+      <div class="property-thumb-info">
+      <h6><a href="listing-details.html">Apartment With 3 BHK</a></h6>
+      <p>$21,000 <span>/month</span></p>
+      </div>
+      </div>
+      <div class="property-thumb-item">
+      <div class="property-thumb-img">
+      <img src="assets/img/blog/post-thumb-3.jpg" alt="Image">
+      </div>
+      <div class="property-thumb-info">
+      <h6><a href="listing-details.html">Ready Flat For Rent</a></h6>
+      <p>$14,000 <span>/month</span></p>
+      </div>
+      </div>
+      </div>
+      -->
+      </div>
+      </div>
+  </div>
 </div>
 </section>
 </div>
@@ -904,7 +913,11 @@ Register Now
                 document.getElementById("garages").innerHTML = temp_data[propertyId]["garages"];
                 document.getElementById("PropertyStatus").innerHTML = temp_data[propertyId]["propertyStatus"];
                 document.getElementById("Area").innerHTML = temp_data[propertyId]["area"] + 'sqft';
-                document.getElementById("buildYear").innerHTML = temp_data[propertyId]["buildYear"];            
+                document.getElementById("buildYear").innerHTML = temp_data[propertyId]["buildYear"];     
+                document.getElementById("agentName").innerHTML = temp_data[propertyId]["fullname"];    
+                document.getElementById("agentAddress").innerHTML = '<i class="ri-map-pin-line"></i>' + temp_data[propertyId]["address"];
+                document.getElementById("agentNumber").innerHTML = '<i class="ri-phone-line"></i>' + temp_data[propertyId]["phone"];
+                document.getElementById("agentEmail").innerHTML = '<i class="ri-mail-send-line"></i>' + temp_data[propertyId]["agentEmail"];
 
                 var index = [];
                     // build the index
